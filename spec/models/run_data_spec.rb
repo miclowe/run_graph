@@ -1,5 +1,13 @@
 require 'spec_helper'
 
 describe RunData do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe "get_data" do
+    it "gets data from Nike" do
+      rundata = RunData.new
+      runs = rundata.get_data
+      expect(runs).to be_an Array
+    end
+  end
+
 end
