@@ -40,4 +40,18 @@ describe RunData do
     expect(total_distance).to be > 0
   end
 
+  it "returns an array of hashes" do
+    rundata = RunData.new
+    runs = rundata.get_data
+    expect(runs).to be_an Array
+    expect(runs[0]).to be_a Hash
+  end
+
+  it "returns total distance per month" do
+    rundata = RunData.new
+    runs = rundata.get_data
+    expect(runs[0][:title]).to eq "January"
+    expect(runs[0][:value]).to eq 60.19
+  end
+
 end
