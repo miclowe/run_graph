@@ -1,5 +1,8 @@
 class GraphController < ApplicationController
 
+  def index
+  end
+
   def statusboard
     rundata = RunData.new
     data = rundata.get_data
@@ -15,6 +18,14 @@ class GraphController < ApplicationController
         ]
       }
     }
+  end
+
+  def morris
+    rundata = RunData.new
+    data = rundata.get_data
+
+    render :json => data
+
   end
 
 end
