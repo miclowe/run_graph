@@ -9,7 +9,8 @@ $(document).ready ->
         data: data
         xkey: "title"
         ykeys: ["value"]
-        labels: ["Total Miles"]
+        labels: ["Total Miles"],
+        barColors: ["purple"]
       )
   )
 
