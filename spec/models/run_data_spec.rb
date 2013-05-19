@@ -3,33 +3,40 @@ require 'spec_helper'
 describe RunData do
 
   before(:each) do
-    rundata = RunData.new
-    @runs = rundata.get_data
+    me = Nike::Client.new(ENV['NIKE_USERNAME'], ENV['NIKE_PASSWORD'])
+    @activities = me.activities(type: :run)
   end
 
   it "gets data from Nike" do
-    expect(@runs).to be_an Array
+    expect(@activities).to be_an Array
   end
 
   it "returns at least one result" do
-    expect(@runs.size).to be > 0
+    expect(@activities.size).to be > 0
   end
 
   it "returns start_date and distance data" do
-    expect(@runs[0]["start_time_utc"]).to be_true
-    expect(@runs[0]["metrics"]["distance"]).to be_true
+    start_time = @activities[0]["start_time_utc"]
+    distance = @activities[0]["metrics"]["distance"]
+    expect(start_time).to be_true
+    expect(distance).to be_true
   end
 
-  it "outputs current year data" do
-    date = @runs[0]["start_time_utc"]
-    run_year = Date.parse(date).year
-    expect(@runs).not_to include run_year
+  it "returns current year data" do
+    run1 = @activities.last
+    run1_yr = run1.start_time_utc.year
+    run1_dist = run1.metrics.distance
+    total_distance = 0
+    if run1_yr == Time.now.year
+      total_distance += run1_dist
+    end
+    expect(total_distance).to be > 0
   end
 
   it "calculates total distance" do
-    dist1 = @runs[0]["metrics"]["distance"]
-    dist2 = @runs[1]["metrics"]["distance"]
-    total_distance = dist1 + dist2
+    run1_dist = @activities[0]["metrics"]["distance"]
+    run2_dist = @activities[1]["metrics"]["distance"]
+    total_distance = run1_dist + run2_dist
     expect(total_distance).to be > 0
   end
 

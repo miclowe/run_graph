@@ -17,6 +17,14 @@ class RunData < ActiveRecord::Base
         runs[month] += distance
       end
     end
+
+     # Statusboard app requires Array
+    data = []
+    data = runs.map do |run|
+      { :title => Date::MONTHNAMES[run[0]], :value => run[1].round(2) }
+    end
+    data
+
   end
 
 end
