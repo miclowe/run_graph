@@ -5,6 +5,8 @@ RunGraph::Application.routes.draw do
   root :to => "graph#index"
   get '/statusboard.json' => 'graph#statusboard'
   get '/morris.json' => 'graph#morris'
+  get '/d3chart.json' => 'graph#d3chartdata'
+  get '/d3chart' => 'graph#d3chart'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

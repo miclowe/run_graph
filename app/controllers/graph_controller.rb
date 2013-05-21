@@ -3,6 +3,9 @@ class GraphController < ApplicationController
   def index
   end
 
+  def d3chart
+  end
+
   def statusboard
     rundata = RunData.new
     data = rundata.get_data
@@ -25,7 +28,6 @@ class GraphController < ApplicationController
     data = rundata.get_data
 
     render :json => data
-
   end
 
 end
